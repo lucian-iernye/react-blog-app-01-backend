@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const MongoClient = require("mongodb");
+// const MongoClient = require("mongodb");
+const mongoose = require("mongoose");
 const path = require("path");
 
 const app = express();
@@ -27,10 +28,11 @@ app.use(bodyParser.json());
 
 const withDB = async (operations, res) => {
   try {
-    const client = await MongoClient.connect("mongodb://localhost:27017", {
+    const client = await mongoose.connect(process.env.DATABASE_URL, {
       useNewUrlParser: true,
+      useUnifiedTopology: true,
     });
-    const db = client.db("my-blog");
+    const db = mongoose.connection;
 
     await operations(db);
 
