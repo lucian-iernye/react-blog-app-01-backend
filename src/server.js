@@ -116,7 +116,7 @@ app.post("/api/articles/:name/add-comment", (req, res) => {
 });
 
 app.get("*", (req, res) => {
-  res.sendfile(path.join(__dirname + "/build/index.html"));
+  res.sendFile(path.join(__dirname + "/build/index.html"));
 });
 
 app.listen(8000, () => {
